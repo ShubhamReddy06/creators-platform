@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
+import ConnectionTest from '../components/common/ConnectionTest.jsx';
 
 const featuredPosts = [
     {
@@ -77,6 +78,15 @@ function Home() {
                     <h2>Ready to share your story?</h2>
                     <p>Join thousands of creators publishing on CreatorHub today.</p>
                     <Link to="/register" className="btn btn-primary">Create Your Account</Link>
+                </div>
+            </section>
+
+            {/* Connection Test */}
+            <section className="connection-test" style={{ padding: '2rem' }}>
+                <div className="section-inner">
+                    <h2 className="section-title">Connectivity</h2>
+                    <p className="section-subtitle">Verify frontend ↔ backend communication</p>
+                    <ConnectionTest />
                 </div>
             </section>
         </main>

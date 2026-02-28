@@ -1,7 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import './Auth.css';
 
 function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        // Mock authentication process
+        if (email && password) {
+            const mockUser = { id: 1, name: 'Demo User', email };
+            const mockToken = 'mock-jwt-token-12345';
+
+            login(mockUser, mockToken);
+            navigate('/dashboard');
+        }
+    };
+
     return (
         <main className="auth-page">
             <div className="auth-card">
@@ -11,7 +31,7 @@ function Login() {
                     <p>Sign in to your CreatorHub account</p>
                 </div>
 
-                <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                <form className="auth-form" onSubmit={handleLogin}>
                     <div className="form-group">
                         <label htmlFor="email">Email Address</label>
                         <input
@@ -19,6 +39,8 @@ function Login() {
                             type="email"
                             placeholder="you@example.com"
                             autoComplete="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
@@ -29,6 +51,8 @@ function Login() {
                             type="password"
                             placeholder="Enter your password"
                             autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 

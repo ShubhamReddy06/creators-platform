@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Dashboard.css';
 
 const stats = [
@@ -16,13 +17,27 @@ const recentPosts = [
 ];
 
 function Dashboard() {
+    const { user, loading, isAuthenticated } = useAuth();
+
+    if (loading) {
+        return (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
+                <p>Loading...</p>
+            </div>
+        );
+    }
+
+    if (!isAuthenticated()) {
+        return <Navigate to="/login" />;
+    }
+
     return (
         <main className="dashboard">
             <div className="dashboard-inner">
                 {/* Welcome */}
                 <div className="dashboard-header">
                     <div>
-                        <h1>Welcome back, Creator 👋</h1>
+                        <h1>Welcome back, {user?.name || 'Creator'} 👋</h1>
                         <p className="dashboard-subtitle">Here&apos;s what&apos;s happening with your blog</p>
                     </div>
                     <Link to="#" className="btn btn-primary">+ New Post</Link>
