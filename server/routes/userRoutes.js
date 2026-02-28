@@ -10,6 +10,9 @@ import {
 const router = express.Router();
 
 // POST /api/users/register - Register a new user
+// POST /api/users/register - Register a new user
+// POST /api/users/register - Register a new user
+
 router.post('/register', registerUser);
 
 // GET /api/users - Get all users
